@@ -1,126 +1,555 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Honorable Joseph Yule Okoma</title>
-  <style>
-    body { font-family: Arial, sans-serif; margin: 0; background: #f4f4f4; color: #333;}
-    header, footer { background: #004080; color: white; text-align: center; padding: 20px;}
-    nav ul { list-style: none; padding: 0; display: flex; justify-content: center; gap: 15px;}
-    nav a { color: white; text-decoration: none; font-weight: bold;}
-    main { padding: 20px; max-width: 900px; margin: auto;}
-    section { margin-bottom: 40px;}
-.gallery { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;}
-.gallery img { width: 280px; border-radius: 5px; box-shadow: 0 0 5px rgba(0,0,0,0.3);}
-    form { display: flex; flex-direction: column; gap: 10px; max-width: 500px; margin: auto;}
-    input, textarea, button { padding: 10px; font-size: 1em;}
-    button { background: #004080; color: white; border: none; cursor: pointer;}
-    #languageSwitcher { margin-top: 10px;}
-    iframe { border: none; width: 100%; height: 400px;}
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L'HONORABLE JOSEPH YULE MUTU YA BATU - Député Provincial de la Tshopo</title>
+    <style>
+        /* RESET ET STYLES DE BASE */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+
+        /* POLICES HIÉRARCHISÉES */
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #2c3e50;
+        }
+
+        h2 {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #34495e;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            font-weight: 500;
+            margin-bottom: 0.8rem;
+            color: #2c3e50;
+        }
+
+        p {
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            color: #555;
+        }
+
+        /* MENU FIXE */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: white;
+            text-align: center;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: white;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-links a:hover {
+            color: #f1c40f;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: #f1c40f;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        /* HERO SECTION */
+        .hero {
+            height: 100vh;
+            background-image: linear-gradient(rgba(44, 62, 80, 0.7), rgba(52, 152, 219, 0.7)), url('https://source.unsplash.com/random/1920x1080/?democracy,congo');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 0 2rem;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            color: white;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: #f0f0f0;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background: linear-gradient(135deg, #3498db 0%, #2c3e50 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(135deg, #2980b9 0%, #34495e 100%);
+        }
+
+        /* SECTIONS */
+        section {
+            padding: 5rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            margin-bottom: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(135deg, #3498db 0%, #2c3e50 100%);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* CONTENU DES SECTIONS */
+        .content-card {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            border-left: 4px solid #3498db;
+            transition: all 0.3s ease;
+        }
+
+        .content-card:hover {
+            background: #e9ecef;
+            transform: translateX(5px);
+        }
+
+        .achievement-list {
+            list-style: none;
+            padding: 1rem 0;
+        }
+
+        .achievement-list li {
+            padding: 0.5rem 0;
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .achievement-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #27ae60;
+            font-weight: bold;
+        }
+
+        .resource-link {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 0.5rem 0.5rem 0.5rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .resource-link:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+
+        /* FORMULAIRE */
+        .contact-form {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #2c3e50;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: #3498db;
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+        }
+
+        /* FOOTER */
+        footer {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 3rem 5%;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* RESPONSIVE DESIGN */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+                padding: 1rem 0;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links li {
+                margin: 0.5rem 0;
+                text-align: center;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            section {
+                padding: 3rem 5%;
+                margin: 1rem 5%;
+            }
+
+            .logo {
+                font-size: 1.1rem;
+            }
+        }
+
+        /* ANIMATIONS */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.6s ease-out;
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <h1>Honorable Joseph Yule Okoma</h1>
-    <p data-lang="fr">Député provincial de Kisangani</p>
-    <p data-lang="en" style="display:none;">Provincial Deputy of Kisangani</p>
-    <nav>
-      <ul>
-        <li><a href="#accueil">Accueil</a></li>
-        <li><a href="#biographie">Biographie</a></li>
-        <li><a href="#actions">Actions</a></li>
-        <li><a href="#actualites">Actualités</a></li>
-        <li><a href="#galerie">Galerie</a></li>
-        <li><a href="#video">Vidéo</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </nav>
-    <select id="languageSwitcher">
-      <option value="fr">Français</option>
-      <option value="en">English</option>
-    </select>
-  </header>
+    <!-- MENU FIXE -->
+    <header>
+        <nav>
+            <div class="logo">L'HONORABLE JOSEPH YULE MUTU YA BATU</div>
+            <ul class="nav-links">
+                <li><a href="#accueil">Accueil</a></li>
+                <li><a href="#parcours">Parcours</a></li>
+                <li><a href="#actions">Actions</a></li>
+                <li><a href="#education">Éducation</a></li>
+                <li><a href="#engagements">Engagements</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="menu-toggle">☰</div>
+        </nav>
+    </header>
 
-  <main>
-    <section id="accueil">
-      <h2 data-lang="fr">Pour une Tshopo forte et solidaire</h2>
-      <h2 data-lang="en" style="display:none;">For a strong and united Tshopo</h2>
-      <p data-lang="fr">Bienvenue sur le site officiel de l’honorable Joseph Yule Okoma, engagé pour le développement de Kisangani et de la province de la Tshopo.</p>
-      <p data-lang="en" style="display:none;">Welcome to the official website of Honorable Joseph Yule Okoma, committed to the development of Kisangani and the Tshopo province.</p>
+    <!-- SECTION HERO -->
+    <section id="accueil" class="hero">
+        <div class="hero-content fade-in">
+            <h1>L'HONORABLE JOSEPH YULE MUTU YA BATU</h1>
+            <p>Député Provincial de la Tshopo - Engagement pour le développement de la commune de Lubunga</p>
+            <a href="#parcours" class="btn">Découvrir le parcours</a>
+        </div>
     </section>
 
-    <section id="biographie">
-      <h2 data-lang="fr">Biographie</h2>
-      <h2 data-lang="en" style="display:none;">Biography</h2>
-      <p data-lang="fr">Élu député provincial en 2023, Joseph Yule est reconnu pour son engagement communautaire, son soutien aux infrastructures locales et son action en faveur des médias et de la jeunesse.</p>
-      <p data-lang="en" style="display:none;">Elected provincial deputy in 2023, Joseph Yule is known for his community engagement, support for local infrastructure, and advocacy for media and youth.</p>
+    <!-- SECTION PARCOURS -->
+    <section id="parcours">
+        <h2 class="section-title">🧑‍⚖️ Parcours et rôle politique</h2>
+        <div class="content-card">
+            <p>L'honorable Joseph Yule est un député provincial actif dans la province de la Tshopo, notamment dans la commune urbano-rurale de Lubunga, située sur la rive gauche de Kisangani. Il est reconnu pour son engagement dans le développement des infrastructures locales et l'amélioration des conditions de vie de ses électeurs.</p>
+        </div>
     </section>
 
+    <!-- SECTION ACTIONS -->
     <section id="actions">
-      <h2 data-lang="fr">Actions</h2>
-      <h2 data-lang="en" style="display:none;">Initiatives</h2>
-      <ul>
-        <li data-lang="fr">Construction d’un puits de forage à Zini pour lutter contre la pénurie d’eau⁽¹⁾</li>
-        <li data-lang="en" style="display:none;">Built a deep well in Zini to combat water shortage⁽¹⁾</li>
-[20/10, 06:40] Microsoft Copilote: <li data-lang="fr">Lobbying pour 15 km de routes asphaltées à Lubunga⁽²⁾</li>
-        <li data-lang="en" style="display:none;">Advocated for 15 km of paved roads in Lubunga⁽²⁾</li>
-        <li data-lang="fr">Don à la chorale AMANI pour son 35e anniversaire⁽³⁾</li>
-        <li data-lang="en" style="display:none;">Donation to AMANI choir for its 35th anniversary⁽³⁾</li>
-      </ul>
+        <h2 class="section-title">🛠️ Actions et réalisations publiques</h2>
+        <div class="content-card">
+            <h3>🔹 Lobbying pour les infrastructures</h3>
+            <p>Grâce à son lobbying actif, Joseph Yule a permis à la commune de Lubunga de bénéficier de :</p>
+            <ul class="achievement-list">
+                <li>15 km de routes asphaltées</li>
+                <li>Éclairage public moderne</li>
+            </ul>
+            <p>Ces projets visent à désenclaver la commune et à améliorer la sécurité et la mobilité des habitants⁽¹⁾.</p>
+            <a href="https://lumiernews.net/tshopo-grace-au-lobbyng-payant-du-depute-provincial-joseph-yule-la-commune-lubunga-va-beneficier-de-15-km-des-routes-asphaltees-et-leclairage-public" class="resource-link" target="_blank">
+                🔗 Lire l'article sur Lumière News
+            </a>
+        </div>
     </section>
 
-    <section id="actualites">
-      <h2 data-lang="fr">Actualités</h2>
-      <h2 data-lang="en" style="display:none;">News</h2>
-      <article>
-        <h3 data-lang="fr">Partenariat avec les journalistes à Kisangani⁽⁴⁾</h3>
-        <h3 data-lang="en" style="display:none;">Partnership with journalists in Kisangani⁽⁴⁾</h3>
-        <p data-lang="fr">Lors de la Journée mondiale de la radio, Joseph Yule a renforcé les liens avec les médias locaux.</p>
-        <p data-lang="en" style="display:none;">During World Radio Day, Joseph Yule strengthened ties with local media.</p>
-      </article>
+    <!-- SECTION ÉDUCATION -->
+    <section id="education">
+        <h2 class="section-title">📚 Bibliothèque ou initiatives éducatives</h2>
+        <div class="content-card">
+            <p>À ce jour, aucune source officielle ne mentionne une bibliothèque personnelle ou un projet éducatif spécifique porté par Joseph Yule. Toutefois, son implication dans des projets de développement local pourrait inclure des volets éducatifs indirects, notamment via des partenariats avec des ONG ou des programmes provinciaux.</p>
+        </div>
     </section>
 
-    <section id="galerie">
-      <h2 data-lang="fr">Galerie</h2>
-      <h2 data-lang="en" style="display:none;">Gallery</h2>
-      <div class="gallery">
-        <img src="https://depechesdelatshopo.com/35-ans-de-la-chorale-amani-le-depute-joseph-yule-okoma-fait-un-don-precieux-a-la-paroisse-sainte-marthe-de-lubunga-kisangani/" alt="Don à la chorale AMANI">
-        <img src="https://lumiernews.net/tshopo-je-suis-venu-travailler-pour-linteret-de-notre-population-nous-nallons-pas-beaucoup-parler-vous-allez-voir-les-actes-dixit-honorable-joseph-yule/" alt="Engagement communautaire">
-      </div>
+    <!-- SECTION ENGAGEMENTS -->
+    <section id="engagements">
+        <h2 class="section-title">🤝 Engagements sociaux et communautaires</h2>
+        <div class="content-card">
+            <p>Bien que les détails précis de ses activités sociales ne soient pas largement documentés, son action politique semble orientée vers :</p>
+            <ul class="achievement-list">
+                <li>Le désenclavement des zones rurales</li>
+                <li>L'amélioration des services publics</li>
+                <li>La représentation active des intérêts de la commune de Lubunga au sein de l'assemblée provinciale</li>
+            </ul>
+        </div>
+        
+        <h3 class="section-title">📎 Autres ressources utiles</h3>
+        <div class="content-card">
+            <a href="https://www.enabel.be/app/uploads/2023/11/Annexe-2-Presentation-generale-Tshopo.pdf" class="resource-link" target="_blank">
+                Programme de coopération Tshopo 2023–2027 (Enabel)
+            </a>
+            <a href="https://www.congoquotidien.com/2024/12/09/actualite-rdc-tshopo-formation-budget/" class="resource-link" target="_blank">
+                Formation des députés provinciaux à la gestion budgétaire (USAID)
+            </a>
+        </div>
     </section>
 
-    <section id="video">
-      <h2 data-lang="fr">Vidéo</h2>
-      <h2 data-lang="en" style="display:none;">Video</h2>
-      <iframe src="https://www.tiktok.com/embed/7326789284277587205" title="Joseph Yule sur TikTok" allowfullscreen></iframe>
-    </section>
-
+    <!-- SECTION CONTACT -->
     <section id="contact">
-      <h2 data-lang="fr">Contact</h2>
-      <h2 data-lang="en" style="display:none;">Contact</h2>
-      <form action="https://api.web3forms.com/submit" method="POST">
-        <input type="hidden" name="access_key" value="e032e789-7a9f-4b52-9ca0-91e838645ab9">
-        <input type="text" name="name" placeholder="Nom / Name" required>
-        <input type="email" name="email" placeholder="Email" required>
-        <textarea name="message" placeholder="Message" required></textarea>
-        <button type="submit">Envoyer / Send</button>
-      </form>
+        <h2 class="section-title">Contact</h2>
+        <div class="contact-form">
+            <p>Pour toute information ou prise de contact avec l'Honorable Joseph Yule Mutu Ya Batu, veuillez utiliser le formulaire ci-dessous :</p>
+            <form action="https://api.web3forms.com/submit" method="POST">
+                <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE">
+                <div class="form-group">
+                    <label for="name">Nom complet</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Adresse email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="subject">Sujet du message</label>
+                    <input type="text" id="subject" name="subject" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Votre message</label>
+                    <textarea id="message" name="message" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="btn">Envoyer le message</button>
+            </form>
+        </div>
     </section>
-  </main>
 
-  <footer>
-    <p>&copy; 2025 Honorable Joseph Yule Okoma</p>
-  </footer>
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2024 L'HONORABLE JOSEPH YULE MUTU YA BATU. Tous droits réservés.</p>
+            <p>Député Provincial de la Tshopo - Engagement pour le développement communautaire</p>
+        </div>
+    </footer>
 
-  <script>
-    const switcher = document.getElementById('languageSwitcher');
-    switcher.addEventListener('change', () => {
-      const lang = switcher.value;
-      document.querySelectorAll('[data-lang]').forEach(el => {
-        el.style.display = el.getAttribute('data-lang') === lang? '': 'none';
-});
-});
-  </script>
+    <script>
+        // MENU TOGGLE POUR MOBILE
+        document.querySelector('.menu-toggle').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+
+        // SCROLL DOUX VERS LES SECTIONS
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    // Fermer le menu mobile s'il est ouvert
+                    document.querySelector('.nav-links').classList.remove('active');
+                    
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // ANIMATION AU SCROLL
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Appliquer l'animation aux sections
+        document.querySelectorAll('section').forEach(section => {
+            if (section.id !== 'accueil') {
+                observer.observe(section);
+            }
+        });
+
+        // Header background change on scroll
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'linear-gradient(135deg, #2c3e50 0%, #2c3e50 100%)';
+            } else {
+                header.style.background = 'linear-gradient(135deg, #2c3e50 0%, #3498db 100%)';
+            }
+        });
+    </script>
 </body>
-          </html>p
+</html>
